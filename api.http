@@ -1,0 +1,114 @@
+### Teste 1: GET - Listar Todas (Deve retornar vazio no início)
+GET http://localhost/API-Series/api/index.php
+###
+# Teste 2: POST - Criar Série 1 (Breaking Bad)
+POST http://localhost/API-Series/api/index.php
+Content-Type: application/json
+
+{
+    "titulo": "Breaking Bad",
+    "genero": "Drama",
+    "ano_lancamento": 2008,
+    "status": "Finalizada"
+}
+###
+# Criar Série 2 (Game of Thrones)
+POST http://localhost/API-Series/api/index.php
+Content-Type: application/json
+
+{
+    "titulo": "Game of Thrones",
+    "genero": "Fantasia",
+    "ano_lancamento": 2011,
+    "status": "Finalizada"
+}
+
+###
+# Criar Série 3 (Stranger Things)
+POST http://localhost/API-Series/api/index.php
+Content-Type: application/json
+
+{
+    "titulo": "Stranger Things",
+    "genero": "Ficção Científica",
+    "ano_lancamento": 2016,
+    "status": "Em Exibição"
+}
+
+###
+# Teste 3: GET - Buscar Série por ID (ID 2)
+GET http://localhost/API-Series/api/index.php?id=2
+###
+# Teste 4: POST - Editar Série (ID 2)
+POST http://localhost/API-Series/api/index.php
+Content-Type: application/json
+
+{
+    "id": 2,
+    "titulo": "House of the Dragon",
+    "genero": "Fantasia Épica",
+    "ano_lancamento": 2022,
+    "status": "Em Exibição"
+}
+
+### Teste 5: POST - Remover Série (Delete)
+POST http://localhost/API-Series/api/index.php
+Content-Type: application/json
+
+{
+    "id": 8, 
+    "action": "delete"
+}
+
+---
+### Testes de Erro
+
+###
+# Teste Erro 1: Criar sem Campo Obrigatório (Faltando 'titulo')
+# Esperado: Status 400 Bad Request. Mensagem sobre campo 'titulo'.
+POST http://localhost/API-Series/api/index.php
+Content-Type: application/json
+
+{
+    "genero": "Drama",
+    "ano_lancamento": 2008,
+    "status": "Finalizada"
+}
+
+###
+# Teste Erro 2: Ano Inválido (Não-numérico)
+# Esperado: Status 400 Bad Request. Mensagem sobre 'ano_lancamento' ser inteiro.
+POST http://localhost/API-Series/api/index.php
+Content-Type: application/json
+
+{
+    "titulo": "Série Teste",
+    "genero": "Ação",
+    "ano_lancamento": "texto",
+    "status": "Em Exibição"
+}
+
+###
+# Teste Erro 3: Buscar ID inexistente
+# Esperado: Status 404 Not Found. Mensagem sobre ID 999.
+GET http://localhost/API-Series/api/index.php?id=999
+
+###
+# Teste Erro 4: Editar ID inexistente
+# Esperado: Status 404 Not Found (O seu código retorna 400 através de validation_error, mas com a mensagem de 404).
+# A mensagem esperada é: "Erro: Série com ID 999 para edição não foi encontrada."
+POST http://localhost/API-Series/api/index.php
+Content-Type: application/json
+
+{
+    "id": 999,
+    "titulo": "Série Inexistente",
+    "genero": "Drama",
+    "ano_lancamento": 2020,
+    "status": "Pendente"
+}
+
+###
+# Teste Erro 5: Método não permitido (PUT)
+# Esperado: Status 405 Method Not Allowed.
+PUT http://localhost/API-Series/api/index.php
