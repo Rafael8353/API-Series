@@ -12,17 +12,14 @@ require_once('../utils/validations.php');
 
 // Gerenciamento do ID Sequencial (Uso de Sessão 1)
 if (!isset($_SESSION['next_series_id'])) {
-    $_SESSION['next_series_id'] = 1; // Inicializa o contador
+    $_SESSION['next_series_id'] = 1;
 }
 
-// Lógica de Roteamento
 $method = $_SERVER['REQUEST_METHOD'];
 
-// Endpoint 1: Buscar Dados (GET)
 if ($method === 'GET') {
     require_once('search.php');
 }
-// Endpoint 2, 3 e 4: Criar/Editar/Remover Dados (POST)
 elseif ($method === 'POST') {
     // Uso de Sessão 2: Armazenar timestamp da última operação
     $_SESSION['last_operation_timestamp'] = time(); 
