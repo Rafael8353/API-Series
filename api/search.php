@@ -34,7 +34,7 @@ elseif (isset($_GET['genero']) && !empty($_GET['genero'])) {
         }
     }
 
-    // 200 - Sucesso (OK)
+    
     send_json_response([
         "success" => true,
         "data" => $filtered_series,

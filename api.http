@@ -51,14 +51,6 @@ Content-Type: application/json
     "status": "Em Exibição"
 }
 
-### Teste 5: POST - Remover Série (Delete)
-POST http://localhost/API-Series/api/index.php
-Content-Type: application/json
-
-{
-    "id": 8, 
-    "action": "delete"
-}
 
 ---
 ### Testes de Erro
