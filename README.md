@@ -30,7 +30,7 @@ As sessões são usadas para manter o estado do contador de ID e registrar a ati
 
 ## 🗺️ 2. Endpoints Implementados
 
-A API utiliza apenas uma URL base (`/api/index.php`) e roteia as ações com base no Método HTTP e nos dados fornecidos.
+A API utiliza apenas uma URL base (`/api/index.php`), porém utiliza 3 endpoints (Criar, Editar e Buscar/Listar) e roteia as ações com base no Método HTTP e nos dados fornecidos.
 
 | Método | URL Base | Parâmetro/Corpo | Funcionalidade | Status de Sucesso |
 | :--- | :--- | :--- | :--- | :--- |
@@ -38,7 +38,7 @@ A API utiliza apenas uma URL base (`/api/index.php`) e roteia as ações com bas
 | **GET** | `/api/index.php` | `?id=X` (Query String) | Buscar série por ID. | 200 OK |
 | **POST** | `/api/index.php` | Dados JSON (Sem `id`) | Criar nova série. | 201 Created |
 | **POST** | `/api/index.php` | Dados JSON (Com `id`) | Editar série existente. | 200 OK |
-| **POST** | `/api/index.php` | Dados JSON (`id` e `"action": "delete"`) | Remover série. | 200 OK |
+
 
 ## 🧪 3. Guia Completo de Testes (REST Client)
 
