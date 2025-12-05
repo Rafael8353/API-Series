@@ -8,39 +8,8 @@ if (empty($data) || !is_array($data)) {
 
 $series_data = get_series_data();
 $id = (int)($data['id'] ?? 0);     
-$action = $data['action'] ?? null; 
 
-if ($action === 'delete') {
-
-    if ($id === 0) {
-        validation_error("Erro: ID é obrigatório para remover o registro.");
-    }
-
-    $found_key = -1;
-    foreach ($series_data as $key => $series) {
-        if ($series['id'] === $id) {
-            $found_key = $key;
-            break;
-        }
-    }
-
-    if ($found_key === -1) {
-        send_error_response("Série com ID {$id} para remoção não foi encontrada.", 404); // 404 Not Found
-    }
-
-    unset($series_data[$found_key]); 
-    $series_data = array_values($series_data); 
-    save_series_data($series_data); 
-
-    send_json_response([
-        "success" => true,
-        "message" => "Registro removido com sucesso",
-        "data" => ["id" => $id]
-    ], 200); 
-}
-
-else {
-    $validation = validate_series_data($data);
+$validation = validate_series_data($data);
     if (!$validation['success']) {
         validation_error($validation['message']);
     }
@@ -56,7 +25,7 @@ else {
         }
 
         if ($found_key === -1) {
-            validation_error("Erro: Série com ID {$id} para edição não foi encontrada.");
+            send_error_response("Erro: Série com ID {$id} para edição não foi encontrada.",404);
         }
 
         $series_data[$found_key]['titulo'] = $data['titulo'];
@@ -96,5 +65,4 @@ else {
             "data" => $new_series
         ], 201); 
     }
-}
 ?>
